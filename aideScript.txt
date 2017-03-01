@@ -1,0 +1,4 @@
+Exécuter un script :
+./monScript.sh
+Si on veut éviter d'écrire le ./ il faut placer son script dans un des
+répertoires de la variable PATH (echo $PATH)
