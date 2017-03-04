@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Exercice 1 : effectuer des opérations simples : somme, soustraction, division et multiplication. Exemple : ./exercice1.sh 3 4
+# Les paramètres $1, $2 etc dans les fonctions les paramètres de la fonction, ce ne sont pas les arguments $1 $2 etc quand on exécute un script
 
 function somme()
 {
