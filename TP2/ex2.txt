@@ -1,0 +1,9 @@
+2) Que fait la commande ps-u nomUtilisateur ?
+
+
+affiche la liste des processus exécutés par nomUtilisateur
+
+
+Je pense que la commande est whoami | xargs ps -u
+On va essayer
+Ca marche

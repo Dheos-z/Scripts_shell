@@ -1,0 +1,10 @@
+3) 
+
+Après une recherche sur internet :
+N°9 : SIGKILL
+N°20 : SIGTSTP
+N°19 : SIGSTOP
+N°18 : SIGCONT
+
+N°19 et N°20 : correspond à CTRL+Z
+Différence : n°20 lié à user et n°19 lié au système
