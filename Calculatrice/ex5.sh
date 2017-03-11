@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# A faire : chercher un moyen de détecter une alternance de nombre/opérateurs
+# Question 5
+# Ecrire un script capable de reconnaître la syntaxe nombres/opérateurs/parenthèses et identifier les erreurs
 
-# Ecrire un script capable de reconnaître la syntaxe nombres/opérateurs
-# Doit commencer par un nombre, puis alterner entre nombre & opérateur
-
+# DETECTION DES ARGUMENTS / REMPLISSAGE DU TABLEAU
 for((i=1;i<=$#;i++))
 {
 	case ${!i} in
@@ -46,6 +45,8 @@ for((i=1;i<=$#;i++))
 	esac
 }
 
+
+
 # Il faut que le premier argument soit un nombre ou une ouvrante
 if [ ${SALUT[1]} != "nombre" ] && [ ${SALUT[1]} != "ouvrante" ]
 then
@@ -53,22 +54,44 @@ then
 	exit
 fi
 
+
+
 # Test de la syntaxe
 for((i=2;i<=$#;i++))
 {
-	# Nombre ou fermante : le prochain doit être ni nombre ni ouvrante
-	if [ "${SALUT[$i-1]}" = "nombre" ] || [ "${SALUT[$i-1]}" = "fermante" ];
+	# OPERATEUR OU OUVRANTE : le prochain doit être ni opérateur ni fermante
+
+	if [ "${SALUT[$i-1]}" = "operateur" ]
 	then
-		if [ "${SALUT[$i]}" = "nombre" ] || [ "${SALUT[$i]}" = "ouvrante" ];
+		if [ "${SALUT[$i]}" = "operateur" ] || [ "${SALUT[$i]}" = "fermante" ]
+		then
+			echo "Erreur : argument n°$i est '${SALUT[$i]}'"
+			exit
+		fi
+
+
+	elif [ "${SALUT[$i-1]}" = "ouvrante" ]
+	then
+		if [ "${SALUT[$i]}" = "operateur" ] || [ "${SALUT[$i]}" = "fermante" ]
+		then
+			echo "Erreur : argument n°$i est '${SALUT[$i]}'"
+			exit
+		fi
+
+
+	# NOMBRE OU FERMANTE : le prochain doit être ni nombre ni ouvrante
+
+	elif [ "${SALUT[$i-1]}" = "nombre" ]
+	then
+		if [ "${SALUT[$i]}" = "nombre" ] || [ "${SALUT[$i]}" = "ouvrante" ]
 		then
 			echo "Erreur : argument n°$i est '${SALUT[$i]}'"
 			exit
 		fi
 	
-	# Opérateur ou ouvrante : le prochain doit être ni opérateur ni fermante
-	elif [ "${SALUT[$i-1]}" = "operateur" ] || [ "${SALUT[$i-1]}" = "ouvrante" ];
+	elif [ "${SALUT[$i-1]}" = "fermante" ]
 	then
-		if [ "${SALUT[$i]}" = "operateur" ] || [ "${SALUT[$i]}" = "fermante" ];
+		if [ "${SALUT[$i]}" = "nombre" ] || [ "${SALUT[$i]}" = "ouvrante" ]
 		then
 			echo "Erreur : argument n°$i est '${SALUT[$i]}'"
 			exit
